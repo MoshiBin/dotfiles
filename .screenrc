@@ -1,0 +1,15 @@
+vbell off
+
+#caption always "%3n %t%? @%u%?%? [%h]%?%=%c"
+## alternative caption, gives window list, LOGNAME and current date:
+caption always "%{wk}%?%-Lw%?%{bw}%n*%f %t%?(%u)%?%{wk}%?%+Lw %=%{mk}@%H %    {yk}%D %{ck}%M%{wk} %{ck}%d %{gk}%c"
+
+defscrollback 30000
+
+term "screen-256color"
+
+attrcolor b ".I"    # allow bold colors - necessary for some reason
+termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'   # tell screen how to set colors. AB = background, AF=foreground
+defbce "on"   # use current bg color for erased chars
+
+startup_message off
