@@ -23,3 +23,11 @@ alias web='python -m SimpleHTTPServer'
 # virtualenvwrapper
 [[ -f /usr/local/bin/virtualenvwrapper.sh ]] && source /usr/local/bin/virtualenvwrapper.sh
 # }}}
+
+# Section: Startup Commands {{{
+if type cowsay cowthink lolcat fortune &>/dev/null; then
+    msg=$(fortune -a -s)
+    speaker=$(cowsay -l | sed '1d;s/ /\n/g' | sort -R | head -1)
+    echo $msg | cowsay -n -f $speaker | lolcat
+fi
+# }}}
