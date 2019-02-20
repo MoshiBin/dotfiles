@@ -1,0 +1,60 @@
+#!/bin/bash
+
+# Prompt colors
+# These are 256 color codes, use xterm-colortest.pl to get them
+_HOSTNAME_FG=235
+_HOSTNAME_BG=208
+_PWD_FG=235
+_PWD_BG=246
+_GIT_FG=246
+_GIT_BG=235
+_CYC_FG=235
+_CYC_BG=220
+
+ARROW=''
+
+##################################
+# Helper functions
+
+_arrow() {
+    _col $1
+    _bg $2
+    echo -en $ARROW
+}
+
+# Set color (256 color mode)
+_fg() {
+    tput setaf $1
+}
+
+_bg() {
+    tput setab $1
+}
+
+_col() {
+    _fg $1
+    _bg $2
+}
+
+# Clear color
+_clr() {
+    tput sgr0
+}
+
+_hostname() {
+    local host=$(echo $HOSTNAME | cut -d "." -f 1)
+    echo -en "$host"
+}
+
+
+##################################
+# Prompt
+
+_PS1_HOSTNAME='\[$(_col $_HOSTNAME_FG $_HOSTNAME_BG)\]$(_hostname) \[$(_col $_HOSTNAME_BG $_PWD_BG)\]$ARROW'
+_PS1_PWD='\[$(_col $_PWD_FG $_PWD_BG)\] \w \[$(_col $_PWD_BG $_GIT_BG)\]$ARROW'
+_PS1_GIT='$(__git_ps1 "\[\033[38;5;${_GIT_FG}m\033[48;5;${_GIT_BG}m\]  %s\[\033[0m\]")\[$(_col $_GIT_BG 0)\]$ARROW'
+
+PS1="${_PS1_HOSTNAME}${_PS1_PWD}${_PS1_GIT}\[$(_clr)\] "
+
+#PS1='[\u@\h \W$(__git_ps1 " (%s)")]\$ '
+#PS1='$(cyc_config_ps1 "(%s)")[\u@\h \W$(__git_ps1 " (%s)")]\$ '

@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# Banner
+if false && [[ -n "$INTERACTIVE" ]]; then
+    if (rpm -q fortune-mod cowsay && which lolcat) &>/dev/null; then
+        fortune="fortune -a -s"
+        $fortune | cowsay -n | lolcat
+    fi
+fi

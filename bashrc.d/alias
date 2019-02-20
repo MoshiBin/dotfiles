@@ -1,0 +1,12 @@
+#!/bin/bash
+
+alias rm="rm -i"
+alias mv="mv -v"
+alias cp="cp -v"
+alias ls="ls --color -p"
+
+alias less="less -R"
+
+alias web='python -m SimpleHTTPServer'
+
+alias glances='docker run --rm --name glances -v /var/run/docker.sock:/var/run/docker.sock:ro --pid host --network host -it docker.io/nicolargo/glances'
