@@ -23,12 +23,21 @@ function _install_link() {
     fi
     
     if [[ -e "$target_link_path" ]]; then
+        if [[ "$(readlink -f "$target_link_path")" == "$filename" ]]; then
+            # already installed; skip
+            return
+        fi
         read -p "Target $target_link_path already exists. Overwrite? (Y/n) " -n 1 -r
+        echo
         if [[ ! "$REPLY" =~ ^[Yy]$ ]]; then
             return
         fi
+        if [[ -d "$target_link_path" ]]; then
+            mv "$target_link_path" "$target_link_path.bak"
+        fi
+        echo "Backed up to $filename.bak"
     fi
-    ln -s "$filename" "$target_link_path"
+    ln -sf "$filename" "$target_link_path"
 }
 
 for target in bashrc vimrc tmux.conf bashrc.d tmux vim screenrc; do
