@@ -1,5 +1,6 @@
 unset PROMPT_COMMAND
 export EDITOR=vim
+export PATH=$HOME/.local/bin:$PATH
 export PATH=$HOME/bin:$PATH
 
 # gruvbox colors (https://github.com/morhetz/gruvbox)
