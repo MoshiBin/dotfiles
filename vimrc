@@ -102,6 +102,20 @@ endif
 call plug#begin('~/.vim/plugged')
 Plug 'morhetz/gruvbox'
 Plug 'vim-syntastic/syntastic'
+Plug 'pearofducks/ansible-vim'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'ekalinin/Dockerfile.vim'
+Plug 'mattn/emmet-vim'
+Plug 'scrooloose/nerdtree'
+Plug 'majutsushi/tagbar'
+Plug 'bling/vim-airline'
+Plug 'will133/vim-dirdiff'
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+Plug 'fatih/vim-go'
+Plug 'tfnico/vim-gradle'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'amadeus/vim-mjml'
 
 call plug#end()
 
