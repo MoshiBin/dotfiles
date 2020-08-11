@@ -53,6 +53,8 @@ au FileType make set noexpandtab
 au FileType html set shiftwidth=2 tabstop=2
 au FileType css set shiftwidth=2 tabstop=2
 au FileType python set makeprg=pylint\ --reports=n\ --msg-template=\"{path}:{line}:\ {msg_id}\ {symbol},\ {obj}\ {msg}\"\ %:p
+au FileType yaml set tabstop=2 shiftwidth=2 softtabstop=2
+au FileType yml set tabstop=2 shiftwidth=2 softtabstop=2
 set textwidth=0
 filetype indent on
 " }}}
@@ -68,7 +70,7 @@ let g:syntastic_python_checkers = ["flake8"]
 let g:syntastic_python_flake8_args = "--ignore=E501"
 
 let g:syntastic_sh_checkers = ["shellcheck"]
-let g:syntastic_sh_shellcheck_args = "-e SC1117 -s bash -x"
+let g:syntastic_sh_shellcheck_args = "-e SC1117,SC1090 -s bash -x"
 
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -89,8 +91,19 @@ if executable('ag')
     let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
 
+let g:go_version_warning = 0
 
-execute pathogen#infect()
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+call plug#begin('~/.vim/plugged')
+Plug 'morhetz/gruvbox'
+Plug 'vim-syntastic/syntastic'
+
+call plug#end()
 
 colorscheme gruvbox
 
@@ -113,6 +126,7 @@ noremap <silent> [D :bp<CR>
 noremap <silent> <Leader>f :NERDTreeToggle<CR>
 
 " Save files as root when I forget to use sudo with vim
-cmap W w !sudo tee > /dev/null %
+cmap WW w !sudo tee > /dev/null %
+cmap w!! w !sudo tee > /dev/null %
 " }}}
 
