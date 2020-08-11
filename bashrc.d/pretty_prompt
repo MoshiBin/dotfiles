@@ -23,11 +23,11 @@ _arrow() {
 
 # Set color (256 color mode)
 _fg() {
-    tput setaf $1
+    tput setaf $1 2>/dev/null
 }
 
 _bg() {
-    tput setab $1
+    tput setab $1 2>/dev/null
 }
 
 _col() {
@@ -37,7 +37,7 @@ _col() {
 
 # Clear color
 _clr() {
-    tput sgr0
+    tput sgr0 2>/dev/null
 }
 
 _hostname() {
@@ -69,3 +69,8 @@ _PS1_GIT='$(__git_ps1 "\[\033[38;5;${_GIT_FG}m\033[48;5;${_GIT_BG}m\]  %s\[\0
 _PS1_VENV='\[$(_col $_VENV_FG $_VENV_BG)\]$(_venv) \[$(_col $_VENV_BG $_HOSTNAME_BG)\]$ARROW'
 
 PS1="${_PS1_VENV}${_PS1_HOSTNAME}${_PS1_PWD}${_PS1_GIT}\[$(_clr)\] "
+
+### Add an alias to unprettify ps1
+ps1() {
+    PS1='[\u@\h \W]\$ '
+}

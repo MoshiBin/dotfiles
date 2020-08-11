@@ -10,3 +10,4 @@ alias less="less -R"
 alias web='python -m SimpleHTTPServer'
 
 alias glances='docker run --rm --name glances -v /var/run/docker.sock:/var/run/docker.sock:ro --pid host --network host -it docker.io/nicolargo/glances'
+alias dive='docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock wagoodman/dive:latest'
